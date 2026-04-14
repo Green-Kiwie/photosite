@@ -4,6 +4,9 @@
     --nav-bg: rgba(20, 25, 30, 0.7);
     --widget-bg: rgba(25, 35, 45, 0.6);
     --border-color: rgba(255, 255, 255, 0.1);
+    --widget-margin-x: 0px;
+    --widget-margin-y: 0px;
+    --widget-scale: 1;
 }
 
 * {
@@ -98,7 +101,7 @@ body {
 }
 
 /* Widget */
-#widget {
+#widget, .ghost-widget {
     position: absolute;
     display: flex;
     align-items: center;
@@ -110,11 +113,28 @@ body {
     border: 1px solid var(--border-color);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     z-index: 50;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.3s;
+    transform: scale(var(--widget-scale));
+    opacity: 1;
+}
+
+.ghost-widget {
+    transition: opacity 2s ease-in-out;
+    pointer-events: none;
+    z-index: 49;
+}
+
+#widget.anim-fade-in {
+    animation: widgetFadeIn 2s ease-in-out;
+}
+
+@keyframes widgetFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 #widget:hover {
-    transform: translateY(-5px);
+    transform: scale(var(--widget-scale)) translateY(-5px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
 }
 
@@ -175,12 +195,10 @@ body {
     left: 3rem;
     letter-spacing: 2px;
     font-size: 1.1rem;
-    opacity: 0.9;
+    font-weight: 600;
     white-space: nowrap;
     z-index: 50;
-    color: #ffffff;
-    mix-blend-mode: difference;
-    transition: transform 0.4s ease-out;
+    transition: transform 0.4s ease-out, color 0.8s ease-in-out;
 }
 
 #photo-info.nav-hidden {
@@ -190,8 +208,8 @@ body {
 
 
 /* Dynamic Positioning Classes for Widget */
-.corner-bottom-left { bottom: 3rem; left: 3rem; top: auto; right: auto; }
-.corner-bottom-right { bottom: 3rem; right: 3rem; top: auto; left: auto; }
-.corner-top-left { top: 6.5rem; left: 3rem; bottom: auto; right: auto; margin-top: 5rem; }
-.corner-top-right { top: 6.5rem; right: 3rem; bottom: auto; left: auto; margin-top: 5rem; }
+.corner-bottom-left { bottom: calc(var(--widget-margin-y) - 1.5rem); left: calc(var(--widget-margin-x) - 1.5rem); top: auto; right: auto; }
+.corner-bottom-right { bottom: calc(var(--widget-margin-y) - 1.5rem); right: calc(var(--widget-margin-x) - 1.5rem); top: auto; left: auto; }
+.corner-top-left { top: calc(var(--widget-margin-y) - 1.5rem); left: calc(var(--widget-margin-x) - 1.5rem); bottom: auto; right: auto; margin-top: 5rem; }
+.corner-top-right { top: calc(var(--widget-margin-y) - 1.5rem); right: calc(var(--widget-margin-x) - 1.5rem); bottom: auto; left: auto; margin-top: 5rem; }
 

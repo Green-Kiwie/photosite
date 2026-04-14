@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 bgContainer.appendChild(img);
             });
 
-            updateUI();
+            updateUI(true);
             startRotation();
             
         } catch(err) {
@@ -159,19 +159,167 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateUI();
     }
 
-    function updateUI() {
+    function showPrevPhoto() {
+        if(photos.length <= 1) return;
+        
+        const images = document.querySelectorAll('.bg-image');
+        images[currentIndex].classList.remove('active');
+        
+        currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+        images[currentIndex].classList.add('active');
+        
+        updateUI(false);
+    }
+
+    function updateUI(isInitial = false) {
         // Update photo info static string top left
         const titleEl = document.getElementById('photo-info');
         titleEl.innerHTML = `SHOOTS.KIWI &copy; 2020 &nbsp;—&nbsp; ${photos[currentIndex].location.toUpperCase()}`;
         
         // Move Widget to designated JSON corner
         const photo = photos[currentIndex];
-        const widgetConfig = photo.widgetPosition || { corner: 'bottom-left' };
-        document.getElementById('widget').className = `corner-${widgetConfig.corner}`;
+        
+        const images = document.querySelectorAll('.bg-image');
+        if(images[currentIndex]) {
+             updateDynamicTextColor(images[currentIndex], titleEl, photo);
+        }
+        
+        const widget = document.getElementById('widget');
+        
+        if (!isInitial) {
+            // Drop a visual clone of the widget to mask the retiring image's watermark flawlessly.
+            const ghost = widget.cloneNode(true);
+            ghost.removeAttribute('id');
+            ghost.className = widget.className + ' ghost-widget';
+            
+            // Snapshot current CSS bindings to decouple it from position drift
+            const oldScale = document.documentElement.style.getPropertyValue('--widget-scale');
+            const oldX = document.documentElement.style.getPropertyValue('--widget-margin-x');
+            const oldY = document.documentElement.style.getPropertyValue('--widget-margin-y');            
+            ghost.style.setProperty('--widget-scale', oldScale);
+            ghost.style.setProperty('--widget-margin-x', oldX);
+            ghost.style.setProperty('--widget-margin-y', oldY);
+            
+            widget.parentNode.appendChild(ghost);
+            
+            void ghost.offsetWidth; // Reflow commit
+            ghost.style.opacity = '0'; // Fire 2s fade out sync
+            
+            setTimeout(() => ghost.remove(), 2000); // Purge memory
+            
+            widget.classList.remove('anim-fade-in');
+            void widget.offsetWidth;
+            widget.classList.add('anim-fade-in');
+        }
+        
+        alignWidgets();
     }
+
+    function alignWidgets() {
+        const img = document.querySelector('.bg-image.active');
+        if (!img || !img.naturalWidth) return;
+        
+        const photo = photos[currentIndex];
+        const pos = photo.widgetPosition || { corner: 'bottom-right', x: 180, y: 180 };
+        
+        // Match the browser's object-fit: cover exact scaling math
+        const scale = Math.max(window.innerWidth / img.naturalWidth, window.innerHeight / img.naturalHeight);
+        
+        const renderW = img.naturalWidth * scale;
+        const renderH = img.naturalHeight * scale;
+        
+        const offsetX = (window.innerWidth - renderW) / 2;
+        const offsetY = (window.innerHeight - renderH) / 2;
+        
+        // Extract exact edge pixel distances dynamically anchoring the object crop scaling 
+        const widgetMarginX = (pos.x * scale) + offsetX;
+        const widgetMarginY = (pos.y * scale) + offsetY;
+        
+        document.documentElement.style.setProperty('--widget-margin-x', `${widgetMarginX}px`);
+        document.documentElement.style.setProperty('--widget-margin-y', `${widgetMarginY}px`);
+        
+        // Sync the physical proportions of the widget window perfectly with the zoom of the text watermark
+        const widgetScale = Math.min(1.8, Math.max(0.45, scale));
+        document.documentElement.style.setProperty('--widget-scale', `${widgetScale}`);
+        
+        const widget = document.getElementById('widget');
+        const isAnim = widget.classList.contains('anim-fade-in');
+        widget.className = `corner-${pos.corner}`;
+        if (isAnim) widget.classList.add('anim-fade-in');
+        
+        widget.style.transformOrigin = pos.corner.replace('-', ' ');
+    }
+    
+    window.addEventListener('resize', alignWidgets);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            showNextPhoto();
+            clearInterval(rotationInterval);
+            startRotation();
+        } else if (e.key === 'ArrowLeft') {
+            showPrevPhoto();
+            clearInterval(rotationInterval);
+            startRotation();
+        }
+    });
 
     function startRotation() {
         rotationInterval = setInterval(showNextPhoto, ROTATION_TIME_MS);
+    }
+    
+    function updateDynamicTextColor(img, textEl, photoObj) {
+        if (photoObj.cachedTitleColor) {
+            textEl.style.color = photoObj.cachedTitleColor;
+            return;
+        }
+
+        if (!img.complete || img.naturalHeight === 0) {
+            img.addEventListener('load', () => {
+                updateDynamicTextColor(img, textEl, photoObj);
+                alignWidgets(); // sync math when image completely fills parameters
+            }, {once: true});
+            return;
+        }
+        
+        try {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
+            
+            const scale = 0.1;
+            canvas.width = img.naturalWidth * scale;
+            canvas.height = img.naturalHeight * scale;
+            
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            const cropW = Math.max(1, Math.floor(canvas.width * 0.4));
+            const cropH = Math.max(1, Math.floor(canvas.height * 0.2));
+            
+            const imageData = ctx.getImageData(0, 0, cropW, cropH);
+            const data = imageData.data;
+            
+            let r=0,g=0,b=0;
+            let count = 0;
+            for(let i = 0; i < data.length; i += 4) {
+               r += data[i]; g += data[i+1]; b += data[i+2];
+               count++;
+            }
+            
+            if (count > 0) {
+                r = r/count; g = g/count; b = b/count;
+                const brightness = Math.round(0.299*r + 0.587*g + 0.114*b);
+                
+                const color = brightness > 127 
+                    ? 'rgba(15, 20, 25, 0.75)'   // Dark slate + transparent
+                    : 'rgba(240, 245, 250, 0.85)'; // Frost white + transparent
+                
+                photoObj.cachedTitleColor = color;
+                textEl.style.color = color;
+            }
+        } catch(e) {
+            console.error("Canvas read failed:", e);
+            textEl.style.color = 'rgba(255, 255, 255, 0.8)';
+        }
     }
 
     initGallery();

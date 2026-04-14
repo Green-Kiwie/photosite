@@ -1,0 +1,197 @@
+:root {
+    --bg-color: #0b1115;
+    --text-color: #e5ecef;
+    --nav-bg: rgba(20, 25, 30, 0.7);
+    --widget-bg: rgba(25, 35, 45, 0.6);
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Caveat', cursive;
+    overflow: hidden;
+    font-size: 1.5rem;
+}
+
+/* Background image system */
+#bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background: #000;
+}
+
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    pointer-events: none;
+    z-index: -2;
+}
+
+.bg-image.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: -1;
+}
+
+/* Nav Bar */
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+
+#navbar.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.logo {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.8rem;
+    letter-spacing: 1.5px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* Widget */
+#widget {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    background: var(--widget-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    z-index: 50;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#widget:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.time-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#clock {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 4.5rem;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+#location-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    opacity: 0.9;
+    letter-spacing: 1px;
+}
+
+.divider {
+    width: 1px;
+    height: 70px;
+    background-color: var(--border-color);
+    margin: 0 2rem;
+}
+
+.weather-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.weather-info {
+    display: flex;
+    flex-direction: column;
+}
+
+#weather-temp {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2rem;
+}
+
+#weather-desc {
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+/* Photo Info */
+#photo-info {
+    position: absolute;
+    top: 6.5rem;
+    left: 3rem;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    white-space: nowrap;
+    z-index: 50;
+    color: #ffffff;
+    mix-blend-mode: difference;
+    transition: transform 0.4s ease-out;
+}
+
+#photo-info.nav-hidden {
+    transform: translateY(-3.5rem);
+}
+
+
+
+/* Dynamic Positioning Classes for Widget */
+.corner-bottom-left { bottom: 3rem; left: 3rem; top: auto; right: auto; }
+.corner-bottom-right { bottom: 3rem; right: 3rem; top: auto; left: auto; }
+.corner-top-left { top: 6.5rem; left: 3rem; bottom: auto; right: auto; margin-top: 5rem; }
+.corner-top-right { top: 6.5rem; right: 3rem; bottom: auto; left: auto; margin-top: 5rem; }
+

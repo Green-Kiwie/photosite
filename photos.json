@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "filename": "Sleepy valley town.jpg",
+    "series": "Sleepy Winter Series",
+    "location": "Banf, Alberta",
+    "description": "",
+    "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+  },
+  {
+    "id": 2,
+    "filename": "Snowy frozen lake.jpg",
+    "series": "Sleepy Winter Series",
+    "location": "Banf, Alberta",
+    "description": "",
+    "widgetPosition": {"corner": "bottom-right", "x": 180, "y": 180}
+  },
+  {
+    "id": 3,
+    "filename": "Sunrise in alpine.jpg",
+    "series": "Sleepy Winter Series",
+    "location": "Banf, Alberta",
+    "description": "",
+    "widgetPosition": {"corner": "bottom-right", "x": 180, "y": 180}
+  },
+  {
+    "id": 4,
+    "filename": "Train in snowy mountains.jpg",
+    "series": "Sleepy Winter Series",
+    "location": "Banf, Alberta",
+    "description": "",
+    "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+  }
+]

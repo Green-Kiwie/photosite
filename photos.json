@@ -1,34 +1,69 @@
-[
-  {
-    "id": 1,
-    "filename": "Sleepy valley town.jpg",
-    "series": "Sleepy Winter Series",
-    "location": "Banf, Alberta",
-    "description": "",
-    "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+{
+  "landscape": {
+    "1": {
+      "filename": "Sleepy valley town.jpg",
+      "series": "Sleepy Winter Series",
+      "location": "Banf, Alberta",
+      "description": "",
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+    },
+    "2": {
+      "filename": "Snowy frozen lake.jpg",
+      "series": "Sleepy Winter Series",
+      "location": "Banf, Alberta",
+      "description": "",
+      "widgetPosition": {"corner": "bottom-right", "x": 180, "y": 180}
+    },
+    "3": {
+      "filename": "Sunrise in alpine.jpg",
+      "series": "Sleepy Winter Series",
+      "location": "Banf, Alberta",
+      "description": "",
+      "widgetPosition": {"corner": "bottom-right", "x": 180, "y": 180}
+    },
+    "4": {
+      "filename": "Train in snowy mountains.jpg",
+      "series": "Sleepy Winter Series",
+      "location": "Banf, Alberta",
+      "description": "",
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+    },
+    "5": {
+      "filename": "Icelandic waterfall.jpg",
+      "series": "Icelandic Ventures Series",
+      "location": "Iceland",
+      "description": "",
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+    },
+    "6": {
+      "filename": "Lonely apostle.jpg",
+      "series": "Rocky Aussie",
+      "location": "Twelve Apostles, Australia",
+      "description": "",
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+    },
+    "9": {
+      "filename": "Speeding Shinkansen.jpg",
+      "series": "How city is Japan",
+      "location": "Japan",
+      "description": "",
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+    }
   },
-  {
-    "id": 2,
-    "filename": "Snowy frozen lake.jpg",
-    "series": "Sleepy Winter Series",
-    "location": "Banf, Alberta",
-    "description": "",
-    "widgetPosition": {"corner": "bottom-right", "x": 180, "y": 180}
-  },
-  {
-    "id": 3,
-    "filename": "Sunrise in alpine.jpg",
-    "series": "Sleepy Winter Series",
-    "location": "Banf, Alberta",
-    "description": "",
-    "widgetPosition": {"corner": "bottom-right", "x": 180, "y": 180}
-  },
-  {
-    "id": 4,
-    "filename": "Train in snowy mountains.jpg",
-    "series": "Sleepy Winter Series",
-    "location": "Banf, Alberta",
-    "description": "",
-    "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+  "portrait": {
+    "7": {
+      "filename": "Not sponsored by stussy.jpg",
+      "series": "Rocky Aussie",
+      "location": "Victoria, Australia",
+      "description": "",
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+    },
+    "8": {
+      "filename": "Sam scramble.jpg",
+      "series": "Rocky Aussie",
+      "location": "Grampians, Australia",
+      "description": "",
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+    }
   }
-]
+}

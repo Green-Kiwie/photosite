@@ -23,9 +23,20 @@ if not os.path.exists(RAW_DIR):
     os.makedirs(RAW_DIR)
 
 with open(JSON_FILE, "r") as f:
-    photos = json.load(f)
+    photo_data = json.load(f)
 
-photo_map = { p["filename"]: p for p in photos }
+# Flatten the nested structure for easier lookup in the watermarking loop
+photos_list = []
+if isinstance(photo_data, dict):
+    for orientation in ['landscape', 'portrait']:
+        if orientation in photo_data:
+            for pid, pdata in photo_data[orientation].items():
+                photos_list.append(pdata)
+else:
+    # Fallback for old flat list structure
+    photos_list = photo_data
+
+photo_map = { p["filename"]: p for p in photos_list }
 
 # Setup a large font. Provide fallback paths for WSL/Ubuntu vs Windows.
 font_paths = [

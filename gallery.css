@@ -1,0 +1,320 @@
+/* Gallery Page Styles */
+
+:root {
+    --gallery-bg: #0b1115;
+    --gallery-text: #e5ecef;
+    --gallery-muted: #8b9ca7;
+    --gallery-accent: #ffffff;
+    --gallery-border: rgba(255, 255, 255, 0.15);
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--gallery-bg);
+    color: var(--gallery-text);
+    font-family: var(--font-body);
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+/* Nav adjustments for Gallery page */
+#navbar {
+    position: sticky;
+    top: 0;
+    transition: transform 0.4s ease-out, background-color 0.4s ease-out;
+    background: rgba(11, 17, 21, 0.9);
+    border-bottom: 1px solid var(--gallery-border);
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0px;
+}
+
+.nav-links {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.nav-links a {
+    color: var(--gallery-muted);
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--gallery-accent);
+    text-shadow: none;
+}
+
+/* Page Layout */
+.gallery-page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+}
+
+/* Header */
+.gallery-header {
+    margin-bottom: 2rem;
+    max-width: 800px;
+}
+
+.gallery-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+    color: var(--gallery-accent);
+}
+
+.gallery-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: var(--gallery-muted);
+    font-weight: 400;
+}
+
+/* Controls */
+.gallery-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--gallery-border);
+    border-bottom: 1px solid var(--gallery-border);
+    padding: 1.5rem 0;
+    margin-bottom: 3rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.control-label {
+    color: var(--gallery-muted);
+}
+
+.control-dropdowns {
+    display: flex;
+    gap: 1rem;
+}
+
+.dropdown-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--gallery-border);
+    color: var(--gallery-text);
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.dropdown-btn:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.3);
+}
+
+.view-toggles {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.view-btn {
+    background: transparent;
+    border: none;
+    color: var(--gallery-muted);
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+    display: flex;
+}
+
+.view-btn:hover {
+    color: var(--gallery-accent);
+    background: rgba(255,255,255,0.05);
+}
+
+.view-btn.active {
+    color: var(--gallery-accent);
+}
+
+/* Series Grouping */
+.series-section {
+    margin-bottom: 6rem; /* The gap between series */
+}
+
+.series-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--gallery-border);
+    padding-bottom: 1rem;
+}
+
+.series-name {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: var(--gallery-accent);
+    text-transform: none;
+}
+
+.justified-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.grid-item {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.4s ease;
+    opacity: 1; /* Default to visible since we fade in via JS */
+}
+
+/* Micro animations for layout items */
+.grid-item:hover {
+    z-index: 10;
+}
+
+.grid-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    vertical-align: bottom;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s;
+    background-color: rgba(255,255,255,0.05);
+}
+
+.grid-item:hover img {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+}
+
+/* Metadata overlay on hover */
+.item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 4rem 1.5rem 1.5rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+}
+
+.grid-item:hover .item-overlay {
+    opacity: 1;
+}
+
+.overlay-series {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gallery-muted);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+.overlay-location {
+    font-size: 1.1rem;
+    color: var(--gallery-accent);
+    font-weight: 500;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* Footer / Load More */
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin: 4rem 0;
+}
+
+.load-more-btn {
+    background: var(--gallery-accent);
+    color: var(--gallery-bg);
+    border: none;
+    padding: 1rem 2rem;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.load-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255,255,255,0.15);
+}
+
+.gallery-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--gallery-border);
+    font-size: 0.85rem;
+    color: var(--gallery-muted);
+}
+
+.footer-right {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-right a {
+    color: var(--gallery-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-right a:hover {
+    color: var(--gallery-accent);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gallery-title {
+        font-size: 3rem;
+    }
+    .grid-item {
+        height: 200px;
+    }
+    .gallery-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+}

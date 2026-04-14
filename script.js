@@ -112,39 +112,70 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Gallery Logic
     const bgContainer = document.getElementById('bg-container');
     
+    let photoData = null;
     let photos = [];
     let currentIndex = 0;
     let rotationInterval;
     const ROTATION_TIME_MS = 3 * 60 * 1000; // 3 minutes rotation
     
+    function getOrientation() {
+        return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+    }
+
+    let currentOrientation = null;
+
     async function initGallery() {
         try {
             const res = await fetch('photos.json');
-            photos = await res.json();
+            photoData = await res.json();
             
-            if (photos.length === 0) return;
+            updateGalleryForOrientation();
             
-            // Randomize starting slide
-            currentIndex = Math.floor(Math.random() * photos.length);
-            
-            photos.forEach((photo, index) => {
-                const img = document.createElement('img');
-                img.src = `watermarked_photos/${photo.filename}`;
-                img.classList.add('bg-image');
-                
-                if(index === currentIndex) {
-                    img.classList.add('active');
+            // Handle orientation changes
+            window.addEventListener('resize', () => {
+                const newOrientation = getOrientation();
+                if (newOrientation !== currentOrientation) {
+                    updateGalleryForOrientation();
                 }
-                
-                bgContainer.appendChild(img);
             });
-
-            updateUI(true);
-            startRotation();
             
         } catch(err) {
             console.error("Error loading photos:", err);
         }
+    }
+
+    function updateGalleryForOrientation() {
+        const orientation = getOrientation();
+        if (orientation === currentOrientation && photos.length > 0) return;
+        
+        currentOrientation = orientation;
+        const rawPhotos = photoData[orientation] || {};
+        const newPhotos = Object.values(rawPhotos);
+        
+        if (newPhotos.length === 0) return;
+
+        photos = newPhotos;
+        
+        // Clear existing images
+        bgContainer.innerHTML = '';
+        
+        // Randomize starting slide
+        currentIndex = Math.floor(Math.random() * photos.length);
+        
+        photos.forEach((photo, index) => {
+            const img = document.createElement('img');
+            img.src = `watermarked_photos/${photo.filename}`;
+            img.classList.add('bg-image');
+            
+            if(index === currentIndex) {
+                img.classList.add('active');
+            }
+            
+            bgContainer.appendChild(img);
+        });
+
+        updateUI(true);
+        startRotation();
     }
 
     function showNextPhoto() {
@@ -174,7 +205,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     function updateUI(isInitial = false) {
         // Update photo info static string top left
         const titleEl = document.getElementById('photo-info');
-        titleEl.innerHTML = `SHOOTS.KIWI &copy; 2020 &nbsp;—&nbsp; ${photos[currentIndex].location.toUpperCase()}`;
+        titleEl.innerHTML = `KIWI SHOOTS &copy; 2024 &nbsp;—&nbsp; ${photos[currentIndex].location.toUpperCase()}`;
         
         // Move Widget to designated JSON corner
         const photo = photos[currentIndex];

@@ -167,6 +167,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             img.src = `watermarked_photos/${photo.filename}`;
             img.classList.add('bg-image');
             
+            // Apply subject-aware anchor point for responsive cropping
+            if (photo.anchor) {
+                img.style.objectPosition = `${photo.anchor.x}% ${photo.anchor.y}%`;
+            }
+            
             if(index === currentIndex) {
                 img.classList.add('active');
             }

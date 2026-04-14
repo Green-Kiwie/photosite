@@ -5,49 +5,56 @@
       "series": "Sleepy Winter Series",
       "location": "Banf, Alberta",
       "description": "",
-      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180},
+      "anchor": {"x": 50, "y": 70}
     },
     "2": {
       "filename": "Snowy frozen lake.jpg",
       "series": "Sleepy Winter Series",
       "location": "Banf, Alberta",
       "description": "",
-      "widgetPosition": {"corner": "bottom-right", "x": 180, "y": 180}
+      "widgetPosition": {"corner": "bottom-right", "x": 180, "y": 180},
+      "anchor": {"x": 50, "y": 50}
     },
     "3": {
       "filename": "Sunrise in alpine.jpg",
       "series": "Sleepy Winter Series",
       "location": "Banf, Alberta",
       "description": "",
-      "widgetPosition": {"corner": "bottom-right", "x": 180, "y": 180}
+      "widgetPosition": {"corner": "bottom-right", "x": 180, "y": 180},
+      "anchor": {"x": 50, "y": 40}
     },
     "4": {
       "filename": "Train in snowy mountains.jpg",
       "series": "Sleepy Winter Series",
       "location": "Banf, Alberta",
       "description": "",
-      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180},
+      "anchor": {"x": 70, "y": 70}
     },
     "5": {
       "filename": "Icelandic waterfall.jpg",
       "series": "Icelandic Ventures Series",
       "location": "Iceland",
       "description": "",
-      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180},
+      "anchor": {"x": 50, "y": 50}
     },
     "6": {
       "filename": "Lonely apostle.jpg",
       "series": "Rocky Aussie",
       "location": "Twelve Apostles, Australia",
       "description": "",
-      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180},
+      "anchor": {"x": 65, "y": 50}
     },
     "9": {
       "filename": "Speeding Shinkansen.jpg",
       "series": "How city is Japan",
       "location": "Japan",
       "description": "",
-      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180},
+      "anchor": {"x": 60, "y": 50}
     }
   },
   "portrait": {
@@ -56,14 +63,16 @@
       "series": "Rocky Aussie",
       "location": "Victoria, Australia",
       "description": "",
-      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180},
+      "anchor": {"x": 50, "y": 40}
     },
     "8": {
       "filename": "Sam scramble.jpg",
       "series": "Rocky Aussie",
       "location": "Grampians, Australia",
       "description": "",
-      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180}
+      "widgetPosition": {"corner": "bottom-left", "x": 180, "y": 180},
+      "anchor": {"x": 50, "y": 30}
     }
   }
 }

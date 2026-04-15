@@ -13,45 +13,28 @@
 body {
     background-color: var(--gallery-bg);
     color: var(--gallery-text);
-    font-family: var(--font-body);
+    /* Font family inherited from style.css */
     overflow-y: auto;
     overflow-x: hidden;
     margin: 0;
 }
 
-/* Nav adjustments for Gallery page */
+/* Nav adjustments for Gallery page - inheriting fonts from style.css */
 #navbar {
     position: sticky;
     top: 0;
     transition: transform 0.4s ease-out, background-color 0.4s ease-out;
     background: rgba(11, 17, 21, 0.9);
     border-bottom: 1px solid var(--gallery-border);
+    display: flex; /* Ensure layout remains consistent */
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    z-index: 100;
 }
 
-.logo {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: 0px;
-}
-
-.nav-links {
-    font-family: var(--font-heading);
-    font-weight: 500;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.nav-links a {
-    color: var(--gallery-muted);
-    font-size: 0.95rem;
-}
-
-.nav-links a:hover,
 .nav-links a.active {
     color: var(--gallery-accent);
-    text-shadow: none;
 }
 
 /* Page Layout */
@@ -79,9 +62,10 @@ body {
 
 .gallery-subtitle {
     font-size: 1.1rem;
-    line-height: 1.4;
+    line-height: 1.5;
     color: var(--gallery-muted);
     font-weight: 400;
+    font-family: 'Inter', sans-serif; /* Consisteny with contact page descriptions */
 }
 
 /* Controls */
@@ -94,6 +78,7 @@ body {
     padding: 1.5rem 0;
     margin-bottom: 3rem;
     font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px;
@@ -121,7 +106,7 @@ body {
     padding: 0.6rem 1.2rem;
     border-radius: 4px;
     cursor: pointer;
-    font-family: var(--font-heading);
+    font-family: 'Inter', sans-serif;
     font-size: 0.85rem;
     font-weight: 500;
     display: flex;
@@ -172,10 +157,9 @@ body {
 }
 
 .series-name {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    font-weight: 600;
-    letter-spacing: -0.5px;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2rem;
+    letter-spacing: 1px;
     color: var(--gallery-accent);
     text-transform: none;
 }
@@ -236,18 +220,18 @@ body {
 }
 
 .overlay-series {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
     color: var(--gallery-muted);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.1rem;
     font-weight: 600;
 }
 
 .overlay-location {
-    font-size: 1.1rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
     color: var(--gallery-accent);
-    font-weight: 500;
+    font-weight: 700;
 }
 
 @keyframes fadeIn {
@@ -265,10 +249,10 @@ body {
     background: var(--gallery-accent);
     color: var(--gallery-bg);
     border: none;
-    padding: 1rem 2rem;
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
-    font-weight: 600;
+    padding: 1rem 2.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
     letter-spacing: 1px;
     cursor: pointer;
     border-radius: 4px;
@@ -283,15 +267,16 @@ body {
 .gallery-footer {
     display: flex;
     justify-content: space-between;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
     border-top: 1px solid var(--gallery-border);
-    font-size: 0.85rem;
+    font-size: 1.4rem;
+    font-family: 'Caveat', cursive;
     color: var(--gallery-muted);
 }
 
 .footer-right {
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .footer-right a {

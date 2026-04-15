@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Prints - Kiwi Shoots</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Permanent+Marker&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="logo">Kiwi shoots</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html" class="active">Contact/Prints</a>
+        </div>
+        <div class="nav-icons">
+            <!-- Shopping bag removed as per request -->
+        </div>
+    </nav>
+
+    <main class="contact-container">
+        <!-- Left: Contact Form -->
+        <section class="contact-left">
+            <div class="contact-form-wrapper">
+                <header class="section-header">
+                    <h2 class="section-tag">Get in Touch</h2>
+                    <p class="section-desc">For commissions, inquiries, or just to say hello.</p>
+                </header>
+
+                <form id="quote-form" class="quote-form" action="https://formspree.io/f/mgorvqad" method="POST">
+                    <div class="form-group">
+                        <label for="name">NAME</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">EMAIL</label>
+                        <input type="email" id="email" name="_replyto" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">MESSAGE</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Share your vision..." required></textarea>
+                    </div>
+                    <!-- Anti-spam hidden field -->
+                    <input type="text" name="_gotcha" style="display:none">
+                    <button type="submit" class="submit-btn" id="submit-btn">SEND MESSAGE</button>
+                    <div id="form-status" class="form-status"></div>
+                </form>
+
+                <footer class="social-links">
+                    <div class="social-share-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="instagram-icon">
+                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </div>
+                    <a href="https://ig.me/m/shoots.kiwi" target="_blank" class="social-link dm-btn">DM ON INSTAGRAM</a>
+                </footer>
+            </div>
+        </section>
+
+        <!-- Right: Print Exhibition -->
+        <section class="contact-right">
+            <div class="exhibition-wrapper">
+                <header class="exhibition-header">
+                    <h2 class="exhibition-tag">Print Shop</h2>
+                    <p class="exhibition-desc">Full quality and high definition prints. Watermarks will be removed.</p>
+                </header>
+
+                <div class="series-selector">
+                    <label for="series-dropdown">SELECT SERIES</label>
+                    <div class="dropdown-wrapper">
+                        <select id="series-dropdown">
+                            <option value="all">All Series</option>
+                            <!-- Options populated via JS -->
+                        </select>
+                        <div class="dropdown-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="prints-grid" class="prints-grid">
+                    <!-- Photo cards injected via JS -->
+                    <div class="loading-indicator">Loading collection...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-left">&copy; 2024 Kiwi Shoots Photography</div>
+        <div class="footer-links">
+            <a href="#">INSTAGRAM</a>
+            <a href="#">TWITTER</a>
+            <a href="#">BEHANCE</a>
+        </div>
+    </footer>
+
+    <script src="contact.js"></script>
+</body>
+</html>

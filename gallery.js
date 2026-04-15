@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let is_loading = false;
 
     let allPhotoData = null;
-    let currentOrientation = null;
 
     function getOrientation() {
         return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
@@ -27,11 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     function initializeGalleryData() {
-        const orientation = getOrientation();
-        if (orientation === currentOrientation && allSeries.length > 0) return;
+        if (allSeries.length > 0) return;
         
-        currentOrientation = orientation;
-        const photos = Object.values(allPhotoData[orientation] || {});
+        // Combine landcape and portrait photos for a universal gallery
+        const landscapePhotos = Object.values(allPhotoData.landscape || {});
+        const portraitPhotos = Object.values(allPhotoData.portrait || {});
+        const photos = [...landscapePhotos, ...portraitPhotos];
 
         // Group and Sort
         const groups = photos.reduce((acc, photo) => {
@@ -153,12 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Debounced Resize Support
     let resizeTimer;
     window.addEventListener('resize', () => {
-        const newOrientation = getOrientation();
-        if (newOrientation !== currentOrientation) {
-            initializeGalleryData();
-            loadNextSeries();
-            return;
-        }
 
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
